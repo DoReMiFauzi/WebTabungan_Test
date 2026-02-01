@@ -18,7 +18,7 @@ class tabunganController extends Controller
         $saldo = $totalSetor - $totalTarik;
 
 
-        return view('index', compact('saldo', 'historyTabungan'));
+        return view('index', compact('saldo', 'historyTabungan', 'totalTarik'));
     }
 
     /**

@@ -32,14 +32,21 @@
 @endif
 </div>
 
-<div class="container mt-5 mb-4">
-    <div class="card" style="width: 18rem;">
+<div class="container mt-5 mb-4 d-flex gap-4">
+  <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Saldo Tabungan</h5>
-    <p class="card-text">Rp. {{ number_format($saldo) }}</p>
-    <a href="{{ route('tabungan.create') }}" class="btn btn-primary">Gas Nabung Lagi</a>
+  <h5 class="card-title">Saldo Tabungan</h5>
+  <p class="card-text">Rp. {{ number_format($saldo, 0, ',', '.') }}</p>
+  <a href="{{ route('tabungan.create') }}" class="btn btn-primary">Gas Nabung Lagi</a>
   </div>
-</div>
+  </div>
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+  <h5 class="card-title">Total Tarik Tabungan</h5>
+  <p class="card-text" style="color: red">Rp. -{{ number_format($totalTarik , 0, ',', '.') }}</p>
+  <a href="{{ route('tabungan.viewTarik') }}" class="btn btn-danger">Tarik Tabungan</a>
+  </div>
+  </div>
 </div>
 
     <div class="container mb-4">
@@ -63,9 +70,9 @@
                         <td style="color: green">{{ $item->tipe }}</td>
                         @endif
                         @if ($item->tipe == 'Tarik')
-                        <td style="color: red">Rp. -{{ number_format($item->nominal) }}</td>
+                        <td style="color: red">Rp. -{{ number_format($item->nominal , 0, ',', '.') }}</td>
                         @else
-                        <td style="color: green">Rp. {{ number_format($item->nominal) }}</td>
+                        <td style="color: green">Rp. {{ number_format($item->nominal, 0, ',', '.') }}</td>
                         @endif
                         @if ($item->keterangan == null)
                             <td>-</td>
