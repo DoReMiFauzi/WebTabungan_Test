@@ -12,9 +12,9 @@ class tabunganController extends Controller
      */
     public function index()
     {
-        $historyTabungan = tabunganModel::count();
-        $totalSetor = tabunganModel::where('tipe', 'setor')->sum('nominal');
-        $totalTarik = tabunganModel::where('tipe', 'tarik')->sum('nominal');
+        $historyTabungan = tabunganModel::all();
+        $totalSetor = tabunganModel::where('tipe', 'Setor')->sum('nominal');
+        $totalTarik = tabunganModel::where('tipe', 'Tarik')->sum('nominal');
         $saldo = $totalSetor - $totalTarik;
 
 
@@ -26,8 +26,8 @@ class tabunganController extends Controller
      */
     public function create()
     {
-        $totalSetor = tabunganModel::where('tipe', 'setor')->sum('nominal');
-        $totalTarik = tabunganModel::where('tipe', 'tarik')->sum('nominal');
+        $totalSetor = tabunganModel::where('tipe', 'Setor')->sum('nominal');
+        $totalTarik = tabunganModel::where('tipe', 'Tarik')->sum('nominal');
         $saldo = $totalSetor - $totalTarik;
         return view('create', compact('saldo'));
     }
@@ -47,15 +47,15 @@ class tabunganController extends Controller
         'tanggal' => $request->tanggal,
         'nominal' => $request->nominal,
         'keterangan' => $request->keterangan,
-        'tipe'    => 'setor',
+        'tipe'    => 'Setor',
     ]);
 
     return redirect()->route('tabungan.index');
     }
 
     public function viewTarik(){
-        $totalSetor = tabunganModel::where('tipe', 'setor')->sum('nominal');
-        $totalTarik = tabunganModel::where('tipe', 'tarik')->sum('nominal');
+        $totalSetor = tabunganModel::where('tipe', 'Setor')->sum('nominal');
+        $totalTarik = tabunganModel::where('tipe', 'Tarik')->sum('nominal');
 
         $saldo = $totalSetor - $totalTarik;
         return view('tarik', compact('saldo'));
@@ -64,11 +64,12 @@ class tabunganController extends Controller
     public function tarikTabungan(Request $request){
         $request->validate([
             'tanggal'=> 'required|date',
-            'nominal'=> 'required|numeric|min:500'
+            'nominal'=> 'required|numeric|min:500',
+            'keterangan' => 'nullable'
         ]);
 
-        $totalSetor = tabunganModel::where('tipe', 'setor')->sum('nominal');
-        $totalTarik = tabunganModel::where('tipe', 'tarik')->sum('nominal');
+        $totalSetor = tabunganModel::where('tipe', 'Setor')->sum('nominal');
+        $totalTarik = tabunganModel::where('tipe', 'Tarik')->sum('nominal');
         $saldo = $totalSetor - $totalTarik;
 
         if($request->nominal > $saldo){
@@ -77,7 +78,8 @@ class tabunganController extends Controller
             tabunganModel::create([
                 'tanggal'=> $request->tanggal,
                 'nominal'=> $request->nominal,
-                'tipe' => 'tarik'
+                'keterangan' => $request->keterangan,
+                'tipe' => 'Tarik'
             ]);
             return redirect()->route('tabungan.index');
         }

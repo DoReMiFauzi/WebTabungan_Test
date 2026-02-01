@@ -15,8 +15,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="{{ route('tabungan.index') }}">Home</a>
-        <a class="nav-link" href="{{ route('tabungan.create') }}">Tabung</a>
+        <a class="nav-link" aria-current="page" href="{{ route('tabungan.index') }}">Home</a>
+        <a class="nav-link active" href="{{ route('tabungan.create') }}">Tabung</a>
         <a class="nav-link" href="{{ route('tabungan.viewTarik') }}">Tarik</a>
       </div>
     </div>

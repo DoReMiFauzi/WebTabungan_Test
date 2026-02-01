@@ -15,9 +15,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="{{ route('tabungan.index') }}">Home</a>
+        <a class="nav-link" aria-current="page" href="{{ route('tabungan.index') }}">Home</a>
         <a class="nav-link" href="{{ route('tabungan.create') }}">Tabung</a>
-        <a class="nav-link" href="{{ route('tabungan.viewTarik') }}">Tarik</a>
+        <a class="nav-link active" href="{{ route('tabungan.viewTarik') }}">Tarik</a>
       </div>
     </div>
   </div>
@@ -42,6 +42,10 @@
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Tanggal</label>
     <input type="date" name="tanggal" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Keterangan</label>
+    <input type="text" name="keterangan" class="form-control" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-danger">Tarik</button>
 </form>

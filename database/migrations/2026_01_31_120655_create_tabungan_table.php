@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('nominal');
             $table->date('tanggal');
             $table->string('keterangan')->nullable();
-            $table->enum('tipe', ['setor', 'tarik'])->default('setor');
+            $table->enum('tipe', ['Setor', 'Tarik'])->default('Setor');
             $table->timestamps();
         });
     }
